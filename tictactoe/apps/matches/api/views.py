@@ -337,13 +337,15 @@ class TurnBoardGameCreateAPIView(generics.CreateAPIView):
                 options_player1.append(int(option_player))
                 query_board.options_player1 = json.dumps(options_player1)
                 
-                if query_board.options_totals == "":
-                    options_totals = []
+                if query_board.options_totals:
+                    options_totals = json.loads(query_board.options_totals)
                     options_totals.append(int(option_player))
                     query_board.options_totals = json.dumps(options_totals)
                     query_board.save()
+
+ 
                 else:
-                    options_totals = json.loads(query_board.options_totals)
+                    options_totals = []
                     options_totals.append(int(option_player))
                     query_board.options_totals = json.dumps(options_totals)
                     query_board.save()
